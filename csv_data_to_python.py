@@ -37,7 +37,8 @@ def gimme_data():
         # if you look at the csv, you could see the first TWO rows are headers for the column.
         # do with that what you will.  You could grab each one by saying lsf_list[0] lsf_list[1]
 
-        # now lets do it with as a dictionary.  our file is still open because we are in the with loop.
+    # now lets do it with as a dictionary.  our file is still open because we are in the with loop.
+    with open('source_data_v2.csv') as csvfile:
         # an optional argument you can give is fieldnames=[<list of words you want for keys>]
         dict_reader = csv.DictReader(csvfile)
         for row in dict_reader:
@@ -47,6 +48,6 @@ def gimme_data():
         # {'name': 'austin', 'age': 5}
 
     # either of these ways works. the second one might be easier to work  with since you can do things like:
-    # row['company_name'] == 'Farella Braun'  # True
+    # row['company_name'] == 'acme corp'  # True
 
     return lsf_list_of_dicts
