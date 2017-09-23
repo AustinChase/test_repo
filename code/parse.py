@@ -36,7 +36,7 @@ def get_non_kaiser_copay():
     for items in my_data:
         non_kaiser_Rx.append(items['Q121_3_1'])
         non_kaiser_Rx = filter(None, non_kaiser_Rx)
- #remove first disciptor variable since it breaks the int function   
+ #remove first descriptor variable since it breaks the int function   
     non_kaiser_Rx.remove(non_kaiser_Rx[0])
     
     sum = 0
