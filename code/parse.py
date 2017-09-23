@@ -24,3 +24,38 @@ if __name__ == '__main__':
     print "there are {} rows in my file".format(len(grabbed_data))
     print "there are {} columns in my file".format(len(grabbed_data[0].keys()))
     print "I was called as a script!!"
+
+
+def get_non_kaiser_copay():
+
+    my_data = parse_csv()
+
+    non_kaiser_Rx = []
+    
+    for items in my_data:
+        non_kaiser_Rx.append(items['Q121_3_1'])
+        non_kaiser_Rx = filter(None, non_kaiser_Rx)
+    
+    non_kaiser_Rx.remove(non_kaiser_Rx[0])
+    
+    sum = 0
+    counter = len(non_kaiser_Rx)
+    average = 0
+    
+    for copay in non_kaiser_Rx:
+        copay = int(copay)
+        sum = sum + copay
+
+    average = sum / counter
+
+    return "The average non Kaiser HMO Rx copay is $%s" %(average)
+
+if __name__ == '__main__':
+    print get_non_kaiser_copay()   
+
+
+
+
+
+
+
