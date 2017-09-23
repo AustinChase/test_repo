@@ -28,20 +28,21 @@ if __name__ == '__main__':
 
 def get_non_kaiser_copay():
 
+# call the parse data function
     my_data = parse_csv()
-
+# create an empty list to store the clean Rx data
     non_kaiser_Rx = []
-    
+# cycle through dictionaries and pull out Q121_3_1, filter out any blanks
     for items in my_data:
         non_kaiser_Rx.append(items['Q121_3_1'])
         non_kaiser_Rx = filter(None, non_kaiser_Rx)
-    
+ #remove first disciptor variable since it breaks the int function   
     non_kaiser_Rx.remove(non_kaiser_Rx[0])
     
     sum = 0
     counter = len(non_kaiser_Rx)
     average = 0
-    
+ #calculate average   
     for copay in non_kaiser_Rx:
         copay = int(copay)
         sum = sum + copay
