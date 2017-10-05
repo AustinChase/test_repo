@@ -55,6 +55,19 @@ if __name__ == '__main__':
     calced_data = get_non_kaiser_copay()
     print  "The average non Kaiser HMO Rx copay is $%s" %calced_data
 
+def get_enrollment():
+    my_data = parse_csv()
+    enrollment = []
+
+    for items in my_data:
+        enrollment.append(items['Q63_1'])
+    enrollment.remove(enrollment[0])
+    enrollment = [0 if v is '' or None else v for v in enrollment]
+    return enrollment
+
+if __name__ == 'main':
+    calced_enrollment = get_enrollment()
+    print "Work in progress, returning a scrubbed enrollment list: %s" %calced_enrollment   
 # this function takes a single argument and writes the argument to a new csv file
 def write_data(answers):
     with open('data_inputs.csv','wb') as csvfile:
@@ -63,10 +76,6 @@ def write_data(answers):
     return
 
 
-
-
-
-        
 
 
 
