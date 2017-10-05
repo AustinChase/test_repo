@@ -26,7 +26,7 @@ if __name__ == '__main__':
     print "I was called as a script!!"
 
 
-def get_non_kaiser_copay():
+def get_copay():
 
 # call the parse data function
     my_data = parse_csv()
@@ -49,10 +49,28 @@ def get_non_kaiser_copay():
 
     average = sum / counter
 
-    return "The average non Kaiser HMO Rx copay is $%s" %(average)
+    return average, " 1 "
 
 if __name__ == '__main__':
-    print get_non_kaiser_copay()   
+    calced_data = get_non_kaiser_copay()
+    print  "The average non Kaiser HMO Rx copay is $%s" %calced_data
+
+# this function takes a single argument and writes the argument to a new csv file
+def write_data(answers):
+    with open('data_inputs.csv','wb') as csvfile:
+        my_writer = csv.writer(csvfile, delimiter = ' ')
+        my_writer.writerow(answers)
+    return
+
+
+
+
+
+        
+
+
+
+
 
 
 
