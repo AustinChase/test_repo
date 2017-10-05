@@ -58,10 +58,12 @@ if __name__ == '__main__':
 def get_enrollment():
     my_data = parse_csv()
     enrollment = []
-
+# populate empty list with raw enrollment data
     for items in my_data:
         enrollment.append(items['Q63_1'])
+ # remove the first row in the list, the questions' description       
     enrollment.remove(enrollment[0])
+# use list comprehension to replace None types and/or string blanks with 0s
     enrollment = [0 if v is '' or None else v for v in enrollment]
     return enrollment
 
