@@ -54,76 +54,33 @@ if __name__ == '__main__':
     calced_data = get_copay()
     print  "The average non Kaiser HMO Rx copay is $%s" %calced_data
 
-def get_enrollment_HMO_non_kaiser():
+def get_enrollment():
     my_data = parse_csv()
-    enrollment_non_kaiser = []
-# populate empty list with raw enrollment data for Non Kaiser HMO
-    for items in my_data:
-        enrollment_non_kaiser.append(items['Q63_1'])
- # remove the first row in the list, the questions' description       
-    enrollment_non_kaiser.remove(enrollment_non_kaiser[0])
-# use list comprehension to replace None types and/or string blanks with 0s
-    enrollment_non_kaiser = [0 if v is '' or None else v for v in enrollment_non_kaiser]
-    return enrollment_non_kaiser
-
-def get_enrollment_HMO_kaiser():
-# same code as get_enrollment_HMO_non_kaiser, just adding HMO_kaiser     
-    my_data = parse_csv()
-    enrollment_kaiser = []
-    # populate empty list with raw enrollment data for Kaiser HMO
-    for items in my_data:
-        enrollment_kaiser.append(items['Q63_2'])
-
-    enrollment_kaiser.remove(enrollment_kaiser[0])
-
-    enrollment_kaiser = [0 if v is '' or None else v for v in enrollment_kaiser]    
-    
-    return enrollment_kaiser
-
-def get_enrollment_PPO():
- # same code as above, just adding PPO   
-    my_data = parse_csv()
-    enrollment_PPO = []
+    enrollment = [[] for x in xrange(0,5)]
 
     for items in my_data:
-        enrollment_PPO.append(items['Q63_3'])
+        enrollment[0].append(items['Q63_1'])
+        enrollment[1].append(items['Q63_2'])
+        enrollment[2].append(items['Q63_3'])
+        enrollment[3].append(items['Q63_4'])
+        enrollment[4].append(items['Q63_6'])
 
-    enrollment_PPO.remove(enrollment_PPO[0]) 
+    enrollment[0].pop(0)
+    enrollment[1].pop(0)
+    enrollment[2].pop(0)
+    enrollment[3].pop(0)
+    enrollment[4].pop(0)
 
-    enrollment_PPO = [0 if v is '' or None else v for v in enrollment_PPO]
+    enrollment[0] = [0 if v is '' or None else v for v in enrollment[0]]
+    enrollment[1] = [0 if v is '' or None else v for v in enrollment[1]]
+    enrollment[2] = [0 if v is '' or None else v for v in enrollment[2]]
+    enrollment[3] = [0 if v is '' or None else v for v in enrollment[3]]
+    enrollment[4] = [0 if v is '' or None else v for v in enrollment[4]]
 
-    return enrollment_PPO
+    return enrollment
 
-def get_enrollment_HDHP():
- # same code as above, just adding PPO   
-    my_data = parse_csv()
-    enrollment_HDHP = []
-
-    for items in my_data:
-        enrollment_HDHP.append(items['Q63_3'])
-
-    enrollment_HDHP.remove(enrollment_HDHP[0]) 
-
-    enrollment_HDHP = [0 if v is '' or None else v for v in enrollment_HDHP]
-
-    return enrollment_HDHP
-
-def get_enrollment_waiver():
- # same code as above, just adding PPO   
-    my_data = parse_csv()
-    enrollment_waiver = []
-
-    for items in my_data:
-        enrollment_waiver.append(items['Q63_3'])
-
-    enrollment_waiver.remove(enrollment_waiver[0]) 
-
-    enrollment_waiver = [0 if v is '' or None else v for v in enrollment_waiver]
-
-    return enrollment_waiver
-
-def get_average_enrollment(eHMO, eKHMO, ePPO, eHDHP, eWaiver):
-    my_list = [eHMO,eKHMO, ePPO, eHDHP, eWaiver]
+def get_average_enrollment(enrollment):
+    my_list = enrollment
     enrollment_sum = 0
     enrollment_sums = [0,0,0,0,0]
     average_enrollment = [0,0,0,0,0]
@@ -161,7 +118,6 @@ def write_data(answers):
         my_writer = csv.writer(csvfile, delimiter = ' ')
         my_writer.writerow(answers)
     return
-
 
 
 
